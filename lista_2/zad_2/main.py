@@ -1,10 +1,8 @@
-# Exercise: Collinearity Problem in Linear Regression
-
 import numpy as np
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
-# Part (a): Perform the given commands
+# Part (a):
 rng = np.random.default_rng(10)
 x1 = rng.uniform(0, 1, size=100)
 x2 = 0.5 * x1 + rng.normal(size=100) / 10
@@ -20,7 +18,7 @@ print("β1 = 2")
 print("β2 = 0.3")
 print()
 
-# Part (b): Compute correlation between x1 and x2 and create scatterplot
+# Part (b):
 corr_x1_x2 = np.corrcoef(x1, x2)[0, 1]
 print("Part (b):")
 print(f"The correlation between x1 and x2 is: {corr_x1_x2:.4f}")
@@ -33,7 +31,7 @@ plt.title('Scatterplot of x1 vs x2')
 plt.savefig('scatterplot.pdf')
 plt.close()
 
-# Part (c): Fit least squares regression to predict y using x1 and x2
+# Part (c):
 X = np.column_stack((x1, x2))
 X = sm.add_constant(X)  # Adds an intercept term
 model = sm.OLS(y, X).fit()
@@ -52,7 +50,7 @@ print(f"P-value for β1: {p_value_beta1:.4f}")
 print(f"P-value for β2: {p_value_beta2:.4f}")
 print()
 
-# Part (d): Fit least squares regression to predict y using only x1
+# Part (d):
 X1 = sm.add_constant(x1)
 model_x1 = sm.OLS(y, X1).fit()
 print("Part (d):")
@@ -65,7 +63,7 @@ p_value_beta1_x1 = model_x1.pvalues[1]
 print(f"P-value for β1: {p_value_beta1_x1:.4f}")
 print()
 
-# Part (e): Fit least squares regression to predict y using only x2
+# Part (e):
 X2 = sm.add_constant(x2)
 model_x2 = sm.OLS(y, X2).fit()
 print("Part (e):")
@@ -78,7 +76,7 @@ p_value_beta1_x2 = model_x2.pvalues[1]
 print(f"P-value for β1: {p_value_beta1_x2:.4f}")
 print()
 
-# Part (g): Add a new observation and re-fit the models
+# Part (g):
 x1 = np.concatenate([x1, [0.1]])
 x2 = np.concatenate([x2, [0.8]])
 y = np.concatenate([y, [6]])
